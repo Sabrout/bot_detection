@@ -1,0 +1,40 @@
+{
+    "params": {
+        "classification__min_child_weight": [
+            1,
+            5,
+            10
+        ],
+        "classification__gamma": [
+            0.5,
+            1,
+            1.5,
+            2
+        ],
+        "classification__subsample": [
+            0.6,
+            0.8
+        ],
+        "classification__colsample_bytree": [
+            0.6,
+            0.8
+        ],
+        "classification__max_depth": [
+            3,
+            4,
+            5
+        ],
+        "classification__eval_metric": [
+            "mlogloss"
+        ],
+        "sampling__random_state": [
+            42
+        ],
+        "sampling__k_neighbors": [
+            5,
+            9,
+            15
+        ]
+    },
+    "n_splits": 5
+}

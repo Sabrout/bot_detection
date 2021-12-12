@@ -1,0 +1,22 @@
+13/12/2021 00:03:25 [DEBUG]: Start model 211212.
+13/12/2021 00:03:25 [INFO]: CSV file loaded at "resources/fake_users_test.csv"
+13/12/2021 00:03:25 [DEBUG]: Preprocessing dataset of 2998 rows
+13/12/2021 00:03:25 [DEBUG]: Categories configuration loaded.
+13/12/2021 00:03:25 [DEBUG]: Dataset cleaned. 0 rows dropped
+13/12/2021 00:03:25 [DEBUG]: Features encoded.
+13/12/2021 00:03:25 [DEBUG]: Dataset grouped by Users
+13/12/2021 00:03:25 [INFO]: File processed.
+13/12/2021 00:03:25 [DEBUG]: Model loaded.
+13/12/2021 00:03:25 [DEBUG]: Predicted fake probabilty for 152 users.
+13/12/2021 00:03:25 [INFO]: Prediction CSV saved at "output/predict_fake_users_test.csv"
+13/12/2021 00:29:48 [DEBUG]: Start model 211212.
+13/12/2021 00:29:48 [INFO]: CSV file loaded at "resources/fake_users_test.csv"
+13/12/2021 00:29:48 [DEBUG]: Preprocessing dataset of 2998 rows
+13/12/2021 00:29:48 [DEBUG]: Categories configuration loaded.
+13/12/2021 00:29:48 [DEBUG]: Dataset cleaned. 0 rows dropped
+13/12/2021 00:29:48 [DEBUG]: Features encoded.
+13/12/2021 00:29:48 [DEBUG]: Dataset grouped by Users
+13/12/2021 00:29:48 [INFO]: File processed.
+13/12/2021 00:29:48 [DEBUG]: Model loaded.
+13/12/2021 00:29:48 [DEBUG]: Predicted fake probabilty for 152 users.
+13/12/2021 00:29:48 [INFO]: Prediction CSV saved at "output/predict_fake_users_test.csv"

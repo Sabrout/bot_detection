@@ -1,0 +1,22 @@
+13/12/2021 00:44:31 [INFO]: Start 211212 training.
+13/12/2021 00:44:31 [INFO]: Train dataset loaded from "resources/fake_users.csv"
+13/12/2021 00:44:31 [INFO]: Test dataset loaded from "resources/fake_users_test.csv"
+13/12/2021 00:44:31 [DEBUG]: Preprocessing dataset of 100473 rows
+13/12/2021 00:44:31 [DEBUG]: Categories configuration loaded.
+13/12/2021 00:44:31 [DEBUG]: Dataset cleaned. 0 rows dropped
+13/12/2021 00:44:31 [DEBUG]: Features encoded.
+13/12/2021 00:44:31 [DEBUG]: Dataset grouped by Users
+13/12/2021 00:44:31 [INFO]: Train dataset preprocessed.
+13/12/2021 00:44:31 [DEBUG]: Preprocessing dataset of 2998 rows
+13/12/2021 00:44:31 [DEBUG]: Categories configuration loaded.
+13/12/2021 00:44:31 [DEBUG]: Dataset cleaned. 0 rows dropped
+13/12/2021 00:44:31 [DEBUG]: Features encoded.
+13/12/2021 00:44:31 [DEBUG]: Dataset grouped by Users
+13/12/2021 00:44:31 [INFO]: Test dataset preprocessed.
+13/12/2021 00:44:31 [DEBUG]: Parameters configuration loaded.
+13/12/2021 00:44:31 [DEBUG]: GridSearch fitting ...
+13/12/2021 00:50:54 [DEBUG]: Time taken: 0 hours 6 minutes and 23.03 seconds.
+13/12/2021 00:50:54 [DEBUG]: Test set predicted.
+13/12/2021 00:50:54 [DEBUG]: Model saved at "model/211212.pkl"
+13/12/2021 00:50:54 [DEBUG]: Model result saved at "model/211212.json"
+13/12/2021 00:50:54 [INFO]: Model training complete.

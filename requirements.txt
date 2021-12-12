@@ -1,0 +1,9 @@
+ipykernel
+pandas
+matplotlib
+plotly
+seaborn
+imblearn
+xgboost
+bottle
+paste

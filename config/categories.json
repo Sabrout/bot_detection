@@ -1,0 +1,18 @@
+{
+    "Event": [
+        "send_email",
+        "click_ad",
+        "click_carrousel",
+        "phone_call",
+        "Real_State",
+        "send_sms"
+    ],
+    "Category": [
+        "Motor",
+        "Holidays",
+        "Leisure",
+        "Phone",
+        "Real_State",
+        "Jobs"
+    ]
+}
