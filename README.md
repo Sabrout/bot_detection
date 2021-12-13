@@ -79,6 +79,10 @@ Since I am no expert on this specific type of datasets and parameter tuning is u
 
 As the correlation amon interaction diversity, frequency and fake probability is potentially the most important factor, it was relatively easy to train a model with extremely high f-beta and f-1 scores (usage of f-beta is explaind in source code). Since the test set is seperated from the train set before training the model and NOT used in the training process, it would be faire to assume the simplicity of the targetted function in addiction to the possibility of overfitting. Thus, another test dataset is absolutely needed to verify the issue of overfitting. Currently, the recommended classification threashold would be the default **0.5**.
 
+## OS Compatibility
+
+One of the greatest concerns when it comes to Python on different operating systems is path handling. So, all paths used in the project are passed through pathlib.Path() to avoid backslash/forwardslash issues between Windows and Linux.
+
 ## Possible Improvements
 
 ### API instead of Python package:
