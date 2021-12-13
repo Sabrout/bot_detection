@@ -4,7 +4,7 @@ A marketplace is being attacked by bots that produce fake clicks and leads. Them
 
 # Contact
 
-The whole project is pushed into a private GitHub reposotiry (in case the test is confidential). If you have any questions or difficulties installing or running the project, please reach out to me on <omarsabrout@gmail.com>.
+The whole project is pushed into a private GitHub reposotiry (in case the test content is confidential). If you have any questions, difficulties installing or running the project, please reach out to me on <omarsabrout@gmail.com>.
 
 # Remarks
 
@@ -35,6 +35,17 @@ In this section, I explain and show the components of the project alongside the 
     └── requirements.txt         # Python environement packages
 
 Trained models are saved in "/model/" directory with a version number that is represented by a date YYMMDD hence **211212.pkl** and **211212.json**.
+
+- [model_version].pkl is the trained model serialized using the joblib package.
+
+- [model_version].json has the model specifications such as:
+  - "params": model assigned parameters (to retrain model if needed).
+  - "train_dataset_size": size of the train dataset used in training.
+  - "features": feature names for each data example X to be predicted.
+  - "precision": precision metric calculated on provided test dataset.
+  - "recall": recall metric calculated on provided test dataset.
+  - "fb-score": fb-score metric (explained in source code) calculated on provided test dataset.
+  - "confusion_matrix": confusion matrix calculated on provided test dataset.
 
 ## Feature Engineering
 
