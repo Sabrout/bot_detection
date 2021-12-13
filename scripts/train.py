@@ -1,9 +1,8 @@
-import logging
-
 import pandas as pd
+
 from scripts.logger import init_logger
-from scripts.preprocess import preprocess
 from scripts.model import train
+from scripts.preprocess import preprocess
 
 logger = init_logger('train')
 
