@@ -3,6 +3,16 @@ import sys
 
 
 def init_logger(name, log_file=True):
+    """
+    Initialize a logger
+
+    Parameters:
+        name (str): name for the logger and also to its file /log/{name}.log
+        log_file (bool): whether to produce a written log or not
+
+    Returns:
+        logger (Logger): logging.getLogger() object
+    """
     # log options
     log_format = '%(asctime)s [%(levelname)s]: %(message)s'
     date_format = '%d/%m/%Y %H:%M:%S'

@@ -1,14 +1,3 @@
-13/12/2021 01:02:11 [DEBUG]: Start model 211212.
-13/12/2021 01:02:11 [INFO]: CSV file loaded at "resources/fake_users_test.csv"
-13/12/2021 01:02:11 [DEBUG]: Preprocessing dataset of 2998 rows
-13/12/2021 01:02:11 [DEBUG]: Categories configuration loaded.
-13/12/2021 01:02:11 [DEBUG]: Dataset cleaned. 0 rows dropped
-13/12/2021 01:02:11 [DEBUG]: Features encoded.
-13/12/2021 01:02:11 [DEBUG]: Dataset grouped by Users
-13/12/2021 01:02:11 [INFO]: File processed.
-13/12/2021 01:02:11 [DEBUG]: Model loaded.
-13/12/2021 01:02:11 [DEBUG]: Predicted fake probabilty for 152 users.
-13/12/2021 01:02:11 [INFO]: Prediction CSV saved at "output/predict_fake_users_test.csv"
 13/12/2021 01:06:21 [DEBUG]: Start model 211212.
 13/12/2021 01:06:21 [INFO]: CSV file loaded at "resources/fake_users_test.csv"
 13/12/2021 01:06:21 [DEBUG]: Preprocessing dataset of 2998 rows

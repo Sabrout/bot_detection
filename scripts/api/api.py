@@ -1,8 +1,8 @@
 import json
-from scripts.logger import init_logger
-from scripts.api.main import predict, MODEL_VERSION, API_VERSION
 
 from bottle import BaseRequest, HTTPError, HTTPResponse, error, get, post, request, run
+from scripts.api.main import API_VERSION, MODEL_VERSION, predict
+from scripts.logger import init_logger
 
 PORT = 8090
 

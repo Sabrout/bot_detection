@@ -14,7 +14,16 @@ warnings.filterwarnings('ignore')
 logger = logging.getLogger('train')
 
 
-def timer(start_time=None):  # a simple timer function that I use in most scripts
+def timer(start_time=None):
+    """
+    A simple timer function that I use to record time of training
+
+    Parameters:
+        start_time (datetime): path to given CSV file
+
+    Writes:
+        runtime (log): period in /log/train.log
+    """
     if not start_time:
         start_time = datetime.now()
         return start_time
@@ -25,11 +34,18 @@ def timer(start_time=None):  # a simple timer function that I use in most script
                      (thour, tmin, round(tsec, 2)))
 
 
-def train(
-    train,
-    test,
-    version,
-):
+def train(train, test, version):
+    """
+    Train a model to predict fake probability.
+
+    Parameters:
+        train (DataFrame): train dataset
+        test (DataFrame): test dataset
+        version (str): name of the resulting model
+
+    Writes:
+        runtime (log): period in /log/train.log
+    """
     # train set
     y = train['Fake'].values
     X = train.drop(['Fake', 'UserId'], axis=1)
@@ -43,6 +59,8 @@ def train(
         'precision': metrics.make_scorer(metrics.precision_score, pos_label=1, average='binary'),
         'recall': metrics.make_scorer(metrics.recall_score, pos_label=1, average='binary'),
         'f1-score': metrics.make_scorer(metrics.f1_score, pos_label=1, average='binary'),
+        # Using f-beta score to focus more on precision
+        # beta < 1 lends more weight to precision, while beta > 1 favors recall
         'fb-score': metrics.make_scorer(metrics.fbeta_score,
                                         beta=0.01,
                                         pos_label=1,
@@ -51,12 +69,14 @@ def train(
 
     # parameter grid
     with open('config/params.json') as json_file:
-        params = json.load(json_file)
+        params = json.load(json_file)  # parameter grid in /config/params.json
         logger.debug('Parameters configuration loaded.')
     cv = StratifiedKFold(n_splits=params['n_splits'])
 
     # pipeline
     model = Pipeline([('sampling', SMOTE()), ('classification', XGBClassifier())])
+    # Since dataset is imbalanced (common with cases of fraud detection), I decided
+    # to oversample the fake examples
     grid = GridSearchCV(model,
                         params['params'],
                         cv=cv,
@@ -80,9 +100,9 @@ def train(
     joblib.dump(grid.best_estimator_, path, compress=1)
     logger.debug(f'Model saved at \"{path}\"')
     result = {
-        'params': grid.best_params_,
+        'params': grid.best_params_,  # to retrain model later without GridSearch if needed
         'train_dataset_size': len(X),
-        'features': X.columns.values.tolist(),
+        'features': X.columns.values.tolist(),  # to be used later in production
         'precision': metrics.precision_score(y_test, y_predicted, average='binary', pos_label=1),
         'recall': metrics.recall_score(y_test, y_predicted, average='binary', pos_label=1),
         'fb-score': metrics.fbeta_score(y_test,
@@ -90,9 +110,10 @@ def train(
                                         beta=0.01,
                                         average='binary',
                                         pos_label=1),
-        'confusion_matrix': metrics.confusion_matrix(y_test, y_predicted).tolist()
+        'confusion_matrix': metrics.confusion_matrix(y_test,
+                                                     y_predicted).tolist()  # KPI to evaluate
     }
     result_path = f'model/{version}.json'
     with open(result_path, "w") as outfile:
-        json.dump(result, outfile)
+        json.dump(result, outfile)  # save model specifications in output/{version}.json
     logger.debug(f'Model result saved at \"{result_path}\"')

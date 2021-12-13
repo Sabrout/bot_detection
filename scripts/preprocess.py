@@ -5,6 +5,17 @@ import pandas as pd
 
 
 def preprocess(df, train_mode=False, disable_log=False):
+    """
+    Prepare train/test datasets to be used by the model
+
+    Parameters:
+        df (DataFrame): data to be processed
+        train_mode (bool): avoid processing (Fake) column or (y) for predictions
+        disable_log (bool): to stop logging while using API (production common practice)
+
+    Returns:
+        df_encoded (DataFrame): processed data
+    """
     # set logger
     if train_mode:
         logger = logging.getLogger('train')
@@ -61,15 +72,15 @@ def preprocess(df, train_mode=False, disable_log=False):
     # encode features for each unique pair (Event, Category)
     df['features'] = df['Event'] + '_' + df['Category']
     df_encoded = pd.get_dummies(df, columns=['features'], prefix='feat')
-    df_encoded = df_encoded.drop(columns=['Event', 'Category'])
+    df_encoded = df_encoded.drop(columns=['Event', 'Category'])  # drop old columns
     logger.debug(f'Features encoded.')
 
     # group by users
-    df_encoded = df_encoded.groupby(['UserId']).sum()
+    df_encoded = df_encoded.groupby(['UserId']).sum()  # each data row repesents a user's whole log
     if train_mode:
-        df_encoded['Fake'] = (df_encoded['Fake'] > 0).astype(int)  # rebinarize Fake
+        df_encoded['Fake'] = (df_encoded['Fake'] > 0).astype(int)  # rebinarize [Fake]
     df_encoded.reset_index(inplace=True)
-    df_encoded = df_encoded.rename(columns={'index': 'UserId'})  # rename UserId
+    df_encoded = df_encoded.rename(columns={'index': 'UserId'})  # restore column name for [UserId]
     logger.debug(f'Dataset grouped by Users')
 
     return df_encoded

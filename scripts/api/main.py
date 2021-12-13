@@ -15,9 +15,16 @@ logger.debug('Model loaded.')
 
 
 def predict(request):
-    logger.debug(f'Start model {MODEL_VERSION}.')
+    """
+    Get fake probability for each user requested through API
 
-    # format request
+    Parameters:
+        request (dict): log of queried users
+
+    Returns:
+        response (dict): API response (see readme) containing predictions and metadata
+    """
+    # format log in request
     try:
         df = pd.DataFrame(request['log'], columns=['UserId', 'Event', 'Category'])
     except:
@@ -28,7 +35,7 @@ def predict(request):
     df = preprocess(df, train_mode=False, disable_log=True)
     X = df.drop(['UserId'], axis=1)
 
-    # missing features (if any)
+    # add missing feature names (if any) from model/{model_name}.json
     with open(f'model/{MODEL_VERSION}.json') as json_file:
         features = json.load(json_file)['features']
     for feature in features:
@@ -37,8 +44,8 @@ def predict(request):
 
     # predict
     y_predicted = model.predict_proba(X)
-    df['is_fake_probability'] = y_predicted[:, 1]
-    df['is_fake_probability'] = df['is_fake_probability'].map('{:,.5f}'.format)
+    df['is_fake_probability'] = y_predicted[:, 1]  # get only positive probability
+    df['is_fake_probability'] = df['is_fake_probability'].map('{:,.5f}'.format)  # 5 float points
     df = df[['UserId', 'is_fake_probability']]
     logger.debug(f'Predicted fake probabilty for {len(y_predicted)} users.')
 
