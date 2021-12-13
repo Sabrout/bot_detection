@@ -87,9 +87,9 @@ A more production friendly approach would be deploying the model in an API that 
 
 Thus, I implemented an API withint the project to demonstrate this improvement.
 
-### OS Independence
+### Containerize
 
-While Python scripts run on any machine that has Python installed, a common practice is adopted in production to use Docker containers since it will probably be deployed on a remote server. These containers require Docker images so
+While Python scripts run arguably on any machine that has Python installed, a common practice is adopted in production to use Docker containers since it will probably be deployed on a remote server. These containers require Docker images so
 
 Hence, I implemented a Dockerfile that builds an image (provided Docker is installed on the host machine) using the command:
 
