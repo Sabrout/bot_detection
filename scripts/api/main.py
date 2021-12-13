@@ -38,6 +38,7 @@ def predict(request):
     # predict
     y_predicted = model.predict_proba(X)
     df['is_fake_probability'] = y_predicted[:, 1]
+    df['is_fake_probability'] = df['is_fake_probability'].map('{:,.5f}'.format)
     df = df[['UserId', 'is_fake_probability']]
     logger.debug(f'Predicted fake probabilty for {len(y_predicted)} users.')
 
