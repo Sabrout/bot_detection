@@ -70,11 +70,44 @@ As the correlation amon interaction diversity, frequency and fake probability is
 
 ## Possible Improvements
 
+### API instead of Python package:
+
+A more production friendly approach would be deploying the model in an API that handles the user logs who pass a certain number of interactions (decided by noise analysis from recommender models) within a certain period of time (5 min as in the problem description). This API can then be queried by production servers to blacklist bot users on the fly.
+
+Thus, I implemented an API withint the project to demonstrate this improvement.
+
+### OS Independence
+
+While Python scripts run on any machine that has Python installed, a common practice is adopted in production to use Docker containers since it will probably be deployed on a remote server. These containers require Docker images so
+
+Hence, I implemented a Dockerfile that builds an image (provided Docker is installed on the host machine) using the command:
+
+```bash
+docker build -t [image_name] .
+```
+
+Where **[image_name]** can be "bot-detection-image" for example. Then we run image using the command:
+
+```bash
+docker run --rm -it --entrypoint bash [image_name]
+```
+
+After running the image, we proceed to either run the CSV prediction script or run the API as explained in the coming sections. We can skip the installation section since it is already included in Dockerfile.
+
 # Installation
 
-# Run
+To install the project, Python 3.8 or higher is required and it is recommended to have an empty Python environment. I personally use Anaconda to handle Python environments. To start, download the provided ZIP archive and extract it. Then, install essential packages by the command:
 
-Run command:
+```bash
+cd [project_path]
+pip install -r requirements.txt
+```
+
+Where **[project_path]** is the absolute path of the extracted archive directory. Now the project is ready to be executed.
+
+# Run CSV Prediction
+
+Copy the target CSV file into the project directory and run command:
 
 ```bash
 python -m scripts.main [csv_path]
