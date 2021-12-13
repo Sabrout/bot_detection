@@ -2,6 +2,7 @@ import json
 import logging
 import warnings
 from datetime import datetime
+from pathlib import Path
 
 import joblib
 from imblearn.over_sampling import SMOTE
@@ -68,7 +69,7 @@ def train(train, test, version):
     }
 
     # parameter grid
-    with open('config/params.json') as json_file:
+    with open(Path('config/params.json')) as json_file:
         params = json.load(json_file)  # parameter grid in /config/params.json
         logger.debug('Parameters configuration loaded.')
     cv = StratifiedKFold(n_splits=params['n_splits'])
@@ -96,7 +97,7 @@ def train(train, test, version):
     logger.debug('Test set predicted.')
 
     # save model and results
-    path = f'model/{version}.pkl'
+    path = Path(f'model/{version}.pkl')
     joblib.dump(grid.best_estimator_, path, compress=1)
     logger.debug(f'Model saved at \"{path}\"')
     result = {
@@ -113,7 +114,7 @@ def train(train, test, version):
         'confusion_matrix': metrics.confusion_matrix(y_test,
                                                      y_predicted).tolist()  # KPI to evaluate
     }
-    result_path = f'model/{version}.json'
+    result_path = Path(f'model/{version}.json')
     with open(result_path, "w") as outfile:
         json.dump(result, outfile)  # save model specifications in output/{version}.json
     logger.debug(f'Model result saved at \"{result_path}\"')

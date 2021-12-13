@@ -1,5 +1,6 @@
 import logging
 import sys
+from pathlib import Path
 
 
 def init_logger(name, log_file=True):
@@ -20,7 +21,7 @@ def init_logger(name, log_file=True):
     level = logging.DEBUG
 
     # handlers
-    file_handler = logging.FileHandler(f'./log/{name}.log', mode='a')
+    file_handler = logging.FileHandler(Path(f'log/{name}.log'), mode='a')
     file_handler.setFormatter(formatter)
     file_handler.setLevel(level)
     console_handler = logging.StreamHandler(stream=sys.stderr)

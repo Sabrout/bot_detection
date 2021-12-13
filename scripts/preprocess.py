@@ -1,5 +1,6 @@
 import json
 import logging
+from pathlib import Path
 
 import pandas as pd
 
@@ -30,7 +31,7 @@ def preprocess(df, train_mode=False, disable_log=False):
 
     # load predefined categories in case a category is missing
     # in training but not at runtime
-    with open('config/categories.json') as json_file:
+    with open(Path('config/categories.json')) as json_file:
         categories = json.load(json_file)
         logger.debug('Categories configuration loaded.')
 

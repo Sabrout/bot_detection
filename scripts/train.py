@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import pandas as pd
 
 from scripts.logger import init_logger
@@ -31,8 +33,8 @@ def main():
         test_csv (str): test dataset to evaluate the model
     """
     version = '211212'
-    train_csv = 'resources/fake_users.csv'
-    test_csv = 'resources/fake_users_test.csv'
+    train_csv = Path('resources/fake_users.csv')
+    test_csv = Path('resources/fake_users_test.csv')
     logger.info(f'Start {version} training.')
 
     # load train/test dataset

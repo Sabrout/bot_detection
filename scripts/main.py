@@ -1,6 +1,7 @@
 import json
 import sys
 import joblib
+from pathlib import Path
 
 from scripts.logger import init_logger
 from scripts.preprocess import preprocess
@@ -37,7 +38,7 @@ def main(path):
     logger.debug('Model loaded.')
 
     # missing feature names (if any) from model/{model_name}.json
-    with open(f'model/{VERSION}.json') as json_file:
+    with open(Path(f'model/{VERSION}.json')) as json_file:
         features = json.load(json_file)['features']
     for feature in features:
         if feature not in X:
@@ -51,7 +52,7 @@ def main(path):
     df['is_fake_probability'] = y_predicted[:, 1]  # get only positive probability
     df['is_fake_probability'] = df['is_fake_probability'].map('{:,.5f}'.format)  # 5 float points
     df = df[['UserId', 'is_fake_probability']]
-    output_path = f'output/predict_{path.split("/")[-1]}'  # write output csv in /output/
+    output_path = Path(f'output/predict_{path.split("/")[-1]}')  # write output csv in /output/
     df.to_csv(output_path, index=False)
     logger.info(f'Prediction CSV saved at \"{output_path}\"')
 

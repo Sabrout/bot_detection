@@ -1,6 +1,7 @@
 import json
 import logging
 import joblib
+from pathlib import Path
 
 import pandas as pd
 
@@ -10,7 +11,7 @@ MODEL_VERSION = 211212
 API_VERSION = 211213
 
 logger = logging.getLogger('api')
-model = joblib.load(f'model/{MODEL_VERSION}.pkl')
+model = joblib.load(Path(f'model/{MODEL_VERSION}.pkl'))
 logger.debug('Model loaded.')
 
 
@@ -36,7 +37,7 @@ def predict(request):
     X = df.drop(['UserId'], axis=1)
 
     # add missing feature names (if any) from model/{model_name}.json
-    with open(f'model/{MODEL_VERSION}.json') as json_file:
+    with open(Path(f'model/{MODEL_VERSION}.json')) as json_file:
         features = json.load(json_file)['features']
     for feature in features:
         if feature not in X:
