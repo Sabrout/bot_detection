@@ -56,10 +56,7 @@ def error404():
 
 @error(500)
 def error500(http_error: HTTPError):
-    return json.dumps({
-        'error':
-        [line.strip() for line in http_error.traceback.split('\n') if len(line.strip()) > 0]
-    })
+    return json.dumps({'error': [line.strip() for line in http_error.traceback.split('\n') if len(line.strip()) > 0]})
 
 
 if __name__ == '__main__':
